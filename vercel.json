@@ -1,7 +1,8 @@
 {
   "rewrites": [
     {
-      "source": "/contacto", "destination": "/contacto"
+      "source": "/(.*)",
+      "destination": "/index.html"
     }
   ]
 }
