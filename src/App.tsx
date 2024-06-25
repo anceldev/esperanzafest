@@ -10,7 +10,7 @@ const App = () => {
       <Routes>
         <Route element={<AuthLayout />}>
           { /** Public routes */}
-          <Route path="/contact" element={<ContactForm />} />
+          <Route path='/contacto' element={<ContactForm />} />
           {/** Private routes */}
         </Route>
         <Route element={<RootLayout />}>
