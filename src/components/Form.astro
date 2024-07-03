@@ -14,8 +14,6 @@ if(Astro.request.method === 'POST') {
     await db.insert(Contact).values({name, email, phone})
   }
 }
-const contacts = await db.select().from(Contact)
-console.log(contacts)
 
 ---
 
