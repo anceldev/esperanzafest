@@ -31,12 +31,12 @@ if (Astro.request.method === "POST") {
   }
 }
 ---
-<div class="flex flex-col justify-center align-middle items-center w-[300px]">
+<div class="flex flex-col justify-between align-middle items-center w-[300px] h-screen">
   {sended ?
   <Submited />
   : <>
-  <h1 class="text-4xl font-bold leading-[4rem] text-white">¿QUIERO CONOCER A<br>JESÚS!</h1>
   <form method="POST" class="flex flex-col mt-12 w-full">
+  <h1 class="text-4xl font-bold leading-[4rem] text-white">¿QUIERO CONOCER A<br>JESÚS!</h1>
     <label for="name" class="mt-4 mb-2 text-white">Nombre</label>
     <!-- <input type="text" id="name" name="name" class="rounded h-8 drop-shadow-lg text-slate-900 pl-2" required> -->
     <input
@@ -73,7 +73,6 @@ if (Astro.request.method === "POST") {
       <button type="submit" class="w-full rounded-lg bg-vibrantOrange text-white px-6 py-2">Enviar</button
       >
     </div>
-  </form>
   <ul class="space-y-3 mt-8 text-white w-full">
     <li class="flex items-center gap-3">
       <Heart/>
@@ -92,6 +91,7 @@ if (Astro.request.method === "POST") {
       <p class="drop-shadow-lg">DEBO TOMAR UNA DECISIÓN</p>
     </li>
   </ul>
+  </form>
   </>
   }
 </div>
