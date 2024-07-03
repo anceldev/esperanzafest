@@ -1,0 +1,15 @@
+<!-- ---
+import { Contact } from "astro:db";
+import { db } from "astro:db";
+
+const datos = await db.select().from(Contact)
+console.log(datos)
+---
+<p>Hay {datos.length} datos </p>
+<ul>
+  {datos.map((data) => (
+    <li>{data.name} - {data.email} - {data.phone}</li>
+  ))
+
+  }
+</ul> -->

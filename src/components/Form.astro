@@ -1,40 +1,103 @@
 ---
-import { db, Contact } from 'astro:db'
+import { db, Contact } from "astro:db";
 
-if(Astro.request.method === 'POST') {
-  const formData = await Astro.request.formData()
-  const name = formData.get('name') as string;
-  const email = formData.get('email') as string;
-  const phone = formData.get('phone') as string;
-  const id = name + email
+import Cross from "../components/icons/Cross.astro";
+import Divide from "../components/icons/Divide.astro";
+import Heart from "../components/icons/Heart.astro";
+import Question from "../components/icons/Question.astro";
+import Submited from "./Submited.astro";
 
-  console.log(name)
-  if(typeof name === 'string' && typeof email === 'string' && typeof phone === 'string') {
-    console.log("writing data")
-    await db.insert(Contact).values({name, email, phone})
+var sended = false
+
+if (Astro.request.method === "POST") {
+  const formData = await Astro.request.formData();
+  const name = formData.get("name") as string;
+  const email = formData.get("email") as string;
+  const phone = formData.get("phone") as string;
+  const id = name + email;
+
+  console.log(name);
+  if (
+    typeof name === "string" &&
+    typeof email === "string" &&
+    typeof phone === "string"
+  ) {
+    console.log("writing data");
+    const response = await db.insert(Contact).values({ name, email, phone });
+    if (response.rowsAffected == 1) {
+      console.log("Dato añadido");
+      sended = true
+    }
   }
 }
-
 ---
+<div class="flex flex-col justify-center align-middle items-center w-[400px]">
+  {sended ?
+  <Submited />
+  : <>
+  <h1 class="text-4xl font-bold leading-[4rem] text-white">¿QUIERO CONOCER A<br>JESÚS!</h1>
+  <form method="POST" class="flex flex-col mt-12 w-full">
+    <label for="name" class="mt-4 mb-2 text-white">Nombre</label>
+    <!-- <input type="text" id="name" name="name" class="rounded h-8 drop-shadow-lg text-slate-900 pl-2" required> -->
+    <input
+      id="name"
+      name="name"
+      class="rounded-lg h-10 drop-shadow-lg text-slate-900 pl-2"
+      required
+    />
 
-<form method="POST" class="flex flex-col mt-12">
-  <label for="name">Nombre</label>
-  <!-- <input type="text" id="name" name="name" class="rounded h-8 drop-shadow-lg text-slate-900 pl-2" required> -->
-  <input id="name" name="name" class="rounded h-8 drop-shadow-lg text-slate-900 pl-2" required>
+    <label for="email" class="mt-4 mb-2 text-white">Correo electrónico</label>
+    <!-- <input type="email" id="email" name="email" class="rounded h-8 drop-shadow-lg text-slate-900 pl-2" required> -->
+    <input
+      id="email"
+      name="email"
+      class="rounded-lg h-10 drop-shadow-lg text-slate-900 pl-2"
+      required
+    />
 
-  <label for="email" class="mt-4">Correo electrónico</label>
-  <!-- <input type="email" id="email" name="email" class="rounded h-8 drop-shadow-lg text-slate-900 pl-2" required> -->
-  <input id="email" name="email" class="rounded h-8 drop-shadow-lg text-slate-900 pl-2" required>
+    <label for="phone" class="mt-4 mb-2 text-white">Teléfono</label>
+    <!-- <input type="tel" id="phone" name="phone" class="rounded h-8 drop-shadow-lg text-slate-900 pl-2" pattern="[679][0-9]{8}" required> -->
+    <input
+      id="phone"
+      name="phone"
+      class="rounded-lg h-10 drop-shadow-lg text-slate-900 pl-2"
+      pattern="[679][0-9]{8}"
+      required
+    />
 
-  <label for="phone" class="mt-4">Teléfono</label>
-  <!-- <input type="tel" id="phone" name="phone" class="rounded h-8 drop-shadow-lg text-slate-900 pl-2" pattern="[679][0-9]{8}" required> -->
-  <input id="phone" name="phone" class="rounded h-8 drop-shadow-lg text-slate-900 pl-2" pattern="[679][0-9]{8}" required>
-  
-  <div class="flex flex-row gap-2 mt-10 ml-4">
-    <input type="checkbox" id="conditions" required>
-    <p>Acepto la política de privacidad</p>
-  </div>
-  <div class="flex justify-start mt-5">
-    <button type="submit" class="rounded bg-blue-600 px-4 py-2">Enviar</button>
-  </div>
-</form>
+    <div class="flex flex-row mt-10 ml-4">
+      <input type="checkbox" id="conditions" required/>
+      <p class="text-white">Acepto la política de privacidad</p>
+    </div>
+    <div class="flex justify-start mt-5">
+      <button type="submit" class="w-full rounded-lg bg-vibrantOrange text-white px-6 py-2">Enviar</button
+      >
+    </div>
+  </form>
+  <ul class="space-y-3 mt-8 text-white w-full">
+    <li class="flex items-center gap-3">
+      <Heart/>
+      <p>DIOS ME AMA</p>
+    </li>
+    <li class="flex items-center gap-3">
+      <Divide/>
+      <p>HE PECADO</p>
+    </li>
+    <li class="flex items-center gap-3">
+      <Cross/>
+      <p>JESÚS MURIÓ POR MI</p>
+    </li>
+    <li class="flex items-center gap-3">
+      <Question/>
+      <p class="drop-shadow-lg">DEBO TOMAR UNA DECISIÓN</p>
+    </li>
+  </ul>
+  </>
+  }
+</div>
+<style>
+  input[type="checkbox"] {
+    width: 50px;
+    height: 30px;
+  }
+</style>

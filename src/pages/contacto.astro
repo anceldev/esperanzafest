@@ -1,9 +1,6 @@
 ---
 import Form from "../components/Form.astro";
-import Cross from "../components/icons/Cross.astro";
-import Divide from "../components/icons/Divide.astro";
-import Heart from "../components/icons/Heart.astro";
-import Question from "../components/icons/Question.astro";
+
 ---
 
 <!doctype html>
@@ -16,30 +13,11 @@ import Question from "../components/icons/Question.astro";
 		<meta name="generator" content={Astro.generator} />
 		<title>Contacto</title>
 	</head>
-	<body>
-		<h1 class="text-3xl font-bold leading-[4rem]">QUIERO CONOCER A<br>JESÚS</h1>
-		<div class="mx-4">
+	<body class="bg-form backdrop-blur-2xl h-screen w-screen">
+		<div class="flex flex-col items-center mx-4 py-8">
 			<Form />
-			<ul class="space-y-3 mt-8">
-				<li class="flex items-center gap-3">
-					<Heart/>
-					<p>DIOS ME AMA</p>
-				</li>
-				<li class="flex items-center gap-3">
-					<Divide/>
-					<p>HE PECADO</p>
-				</li>
-				<li class="flex items-center gap-3">
-					<Cross/>
-					<p>JESÚS MURIÓ POR MI</p>
-				</li>
-				<li class="flex items-center gap-3">
-					<Question/>
-					<p class="drop-shadow-lg">DEBO TOMAR UNA DECISIÓN</p>
-				</li>
-			</ul>
 		</div>
-		<footer class="flex justify-center mt-6">
+		<footer class="flex justify-center mt-6 pb-12 text-white">
 			<a href="/privacity" class="text-yellow-200 font-semibold drop-shadow">Política de privacidad</a>
 		</footer>
 	</body>
