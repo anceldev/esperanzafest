@@ -1,0 +1,40 @@
+---
+import { db, Contact } from 'astro:db'
+
+if(Astro.request.method === 'POST') {
+  const formData = await Astro.request.formData()
+  const name = formData.get('name');
+  const email = formData.get('email');
+  const phone = formData.get('phone');
+
+  console.log(name)
+  if(typeof name === 'string' && typeof email === 'string' && typeof phone === 'string') {
+    await db.insert(Contact).values({name, email, phone})
+  }
+}
+const contacts = await db.select().from(Contact)
+console.log(contacts)
+
+---
+
+<form method="POST" class="flex flex-col mt-12">
+  <label for="name">Nombre</label>
+  <!-- <input type="text" id="name" name="name" class="rounded h-8 drop-shadow-lg text-slate-900 pl-2" required> -->
+  <input id="name" name="name" class="rounded h-8 drop-shadow-lg text-slate-900 pl-2" required>
+
+  <label for="email" class="mt-4">Correo electrónico</label>
+  <!-- <input type="email" id="email" name="email" class="rounded h-8 drop-shadow-lg text-slate-900 pl-2" required> -->
+  <input id="email" name="email" class="rounded h-8 drop-shadow-lg text-slate-900 pl-2" required>
+
+  <label for="phone" class="mt-4">Teléfono</label>
+  <!-- <input type="tel" id="phone" name="phone" class="rounded h-8 drop-shadow-lg text-slate-900 pl-2" pattern="[679][0-9]{8}" required> -->
+  <input id="phone" name="phone" class="rounded h-8 drop-shadow-lg text-slate-900 pl-2" pattern="[679][0-9]{8}" required>
+  
+  <div class="flex flex-row gap-2 mt-10 ml-4">
+    <input type="checkbox" id="conditions" required>
+    <p>Acepto la política de privacidad</p>
+  </div>
+  <div class="flex justify-start mt-5">
+    <button type="submit" class="rounded bg-blue-600 px-4 py-2">Enviar</button>
+  </div>
+</form>
