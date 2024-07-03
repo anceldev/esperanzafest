@@ -8,6 +8,7 @@ import '@astrojs/db/dist/runtime/virtual.js';
 
 const db = await createRemoteDatabaseClient(process.env.ASTRO_STUDIO_APP_TOKEN, {"BASE_URL": "/", "MODE": "production", "DEV": false, "PROD": true, "SSR": true, "SITE": undefined, "ASSETS_PREFIX": undefined}.ASTRO_STUDIO_REMOTE_DB_URL ?? "https://db.services.astro.build");
 const Contact = asDrizzleTable("Contact", { "columns": { "name": { "type": "text", "schema": { "unique": false, "deprecated": false, "name": "name", "collection": "Contact", "primaryKey": false, "optional": false } }, "email": { "type": "text", "schema": { "unique": false, "deprecated": false, "name": "email", "collection": "Contact", "primaryKey": false, "optional": false } }, "phone": { "type": "text", "schema": { "unique": false, "deprecated": false, "name": "phone", "collection": "Contact", "primaryKey": false, "optional": false } } }, "deprecated": false, "indexes": {} }, false);
+asDrizzleTable("Contacto", { "columns": { "id": { "type": "text", "schema": { "unique": false, "deprecated": false, "name": "id", "collection": "Contacto", "primaryKey": false, "optional": false } }, "name": { "type": "text", "schema": { "unique": false, "deprecated": false, "name": "name", "collection": "Contacto", "primaryKey": false, "optional": false } }, "email": { "type": "text", "schema": { "unique": false, "deprecated": false, "name": "email", "collection": "Contacto", "primaryKey": false, "optional": false } }, "phone": { "type": "text", "schema": { "unique": false, "deprecated": false, "name": "phone", "collection": "Contacto", "primaryKey": false, "optional": false } } }, "deprecated": false, "indexes": {} }, false);
 
 const $$Astro$1 = createAstro();
 const $$Form = createComponent(async ($$result, $$props, $$slots) => {
@@ -20,6 +21,7 @@ const $$Form = createComponent(async ($$result, $$props, $$slots) => {
     const phone = formData.get("phone");
     console.log(name);
     if (typeof name === "string" && typeof email === "string" && typeof phone === "string") {
+      console.log("writing data");
       await db.insert(Contact).values({ name, email, phone });
     }
   }

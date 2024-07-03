@@ -1,5 +1,5 @@
 ---
-import { db, Contacto } from 'astro:db'
+import { db, Contact } from 'astro:db'
 
 if(Astro.request.method === 'POST') {
   const formData = await Astro.request.formData()
@@ -11,10 +11,10 @@ if(Astro.request.method === 'POST') {
   console.log(name)
   if(typeof name === 'string' && typeof email === 'string' && typeof phone === 'string') {
     console.log("writing data")
-    await db.insert(Contacto).values({id, name, email, phone})
+    await db.insert(Contact).values({name, email, phone})
   }
 }
-const contacts = await db.select().from(Contacto)
+const contacts = await db.select().from(Contact)
 console.log(contacts)
 
 ---
