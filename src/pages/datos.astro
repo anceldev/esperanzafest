@@ -1,14 +1,16 @@
 ---
-import { db, Contact } from "astro:db";
+// import { db, Contact } from "astro:db";
+import Footer from "../components/Footer.astro";
 
-const datos = await db.select().from(Contact)
-console.log(datos)
+// const datos = await db.select().from(Contact)
+// console.log(datos)
 ---
-<p>Hay {datos.length} datos </p>
+<!-- <p>Hay {datos.length} datos </p>
 <ul>
   {datos.map((data) => (
     <li>{data.name} - {data.email} - {data.phone}</li>
   ))
 
   }
-</ul>
+</ul> -->
+<Footer />
