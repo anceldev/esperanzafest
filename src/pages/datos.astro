@@ -1,6 +1,5 @@
-<!-- ---
-import { Contact } from "astro:db";
-import { db } from "astro:db";
+---
+import { db, Contact } from "astro:db";
 
 const datos = await db.select().from(Contact)
 console.log(datos)
@@ -12,4 +11,4 @@ console.log(datos)
   ))
 
   }
-</ul> -->
+</ul>
